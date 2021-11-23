@@ -1,4 +1,3 @@
-from django.shortcuts import render
 from rest_framework import viewsets
 from django_filters.rest_framework import DjangoFilterBackend
 from .serializers import GameSerializer, PartySerializer, MessageSerializer, UserSerializer
@@ -6,6 +5,12 @@ from .models import Game, Party, Message, CustomUser
 
 
 class GameViewSet(viewsets.ModelViewSet):
+    """
+    GameViewSet:
+        Returns a list of all **games** in the system, ordered by name.
+        Uses the **GameSerializer** as serializer class.
+        Provide the way to filter the games by **name**.
+    """
     queryset = Game.objects.all().order_by('name')
     serializer_class = GameSerializer
     filter_backends = [DjangoFilterBackend]
@@ -13,6 +18,12 @@ class GameViewSet(viewsets.ModelViewSet):
 
 
 class PartyViewSet(viewsets.ModelViewSet):
+    """
+    PartyViewSet:
+        Returns a list of all **parties** in the system, ordered by name.
+        Uses the **PartySerializer** as serializer class.
+        Provide the way to filter the games by **game id**.
+    """
     queryset = Party.objects.all().order_by('name')
     serializer_class = PartySerializer
     filter_backends = [DjangoFilterBackend]
@@ -20,6 +31,12 @@ class PartyViewSet(viewsets.ModelViewSet):
 
 
 class MessageViewSet(viewsets.ModelViewSet):
+    """
+    MessageViewSet:
+        Returns a list of all **messages** in the system, ordered by created date.
+        Uses the **MessageSerializer** as serializer class.
+        Provide the way to filter the games by **party id**.
+    """
     queryset = Message.objects.all().order_by('created_date')
     serializer_class = MessageSerializer
     filter_backends = [DjangoFilterBackend]
@@ -27,6 +44,12 @@ class MessageViewSet(viewsets.ModelViewSet):
 
 
 class UserViewSet(viewsets.ModelViewSet):
+    """
+    UserViewSet:
+        Returns a list of all **users** in the system.
+        Uses the **UserSerializer** as serializer class.
+        Lookup the **username** field to search between all the elements.
+    """
     queryset = CustomUser.objects.all()
     serializer_class = UserSerializer
     lookup_fields = ['username']
