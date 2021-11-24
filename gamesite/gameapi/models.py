@@ -4,6 +4,32 @@ from django.utils import timezone
 from django.contrib.auth.models import AbstractUser
 
 
+class BelongsTo(models.Model):
+    """
+    BelongsTo:
+        This class extends from the **base model** provided by Django.
+        Include the **added_by** field in all the views that inherit from it.
+        The **added_by** field represents the relationship with the user who creates the element.
+    """
+    added_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+
+    class Meta:
+        abstract = True
+
+
+class CreatedDate(models.Model):
+    """
+    CreatedDate:
+        This class extends from the **base model** provided by Django.
+        Include the **created_date** field in all the views that inherit from it.
+        The **created_date** is the field to keep a timestamp when the element was created.
+    """
+    created_date = models.DateTimeField(default=timezone.now)
+
+    class Meta:
+        abstract = True
+
+
 class CustomUser(AbstractUser):
     """
     CustomUser:
@@ -19,52 +45,43 @@ class CustomUser(AbstractUser):
         return self.email
 
 
-class Game(models.Model):
+class Game(BelongsTo, CreatedDate):
     """
     Game:
-        This model extends from the model base provided by Django.
-        Added the field name with a maximum length of 200 letters.
-        The added by field represent the relationship with the user who creates the game.
-        The created date is the field to keep a timestamp when the game was created.
+        This model inherits the properties from the classes: BelongsTo and CreatedDate.
+        And the **base model** provided by Django because these classes inherit from it.
+        Added the field **name** with a maximum length of 200 letters.
     """
     name = models.CharField(max_length=200)
-    added_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    created_date = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
         return self.name
 
 
-class Party(models.Model):
+class Party(BelongsTo, CreatedDate):
     """
     Party:
-        This model extends from the model base provided by Django.
-        Added the field name with a maximum length of 200 letters.
-        The added by field represents the relationship with the user who creates the party.
-        The created date is the field to keep a timestamp when the party was created.
-        The game id field represents the relationship to the game which this party belongs.
+        This model inherits the properties from the classes: BelongsTo and CreatedDate.
+        And the **base model** provided by Django because these classes inherit from it.
+        Added the field **name** with a maximum length of 200 letters.
+        The **game_id** field represents the relationship to the game to which this party belongs.
     """
     name = models.CharField(max_length=200)
-    added_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    created_date = models.DateTimeField(default=timezone.now)
     game_id = models.ForeignKey(Game, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name
 
 
-class Message(models.Model):
+class Message(BelongsTo, CreatedDate):
     """
     Message:
-        This model extends from the model base provided by Django.
-        Added the field content with a maximum length of 200 letters.
-        The added by field represents the relationship with the user who creates the message.
-        The created date is the field to keep a timestamp when the message was created.
-        The party id field represents the relationship to the party which this message belongs.
+        This model inherits the properties from the classes: BelongsTo and CreatedDate.
+        And the **base model** provided by Django because these classes inherit from it.
+        Added the field **content** with a maximum length of 200 letters.
+        The **party_id** field represents the relationship to the party to which this message belongs.
     """
     content = models.CharField(max_length=200)
-    added_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    created_date = models.DateTimeField(default=timezone.now)
     party_id = models.ForeignKey(Party, on_delete=models.CASCADE)
 
     def __str__(self):
