@@ -4,7 +4,16 @@ from .serializers import GameSerializer, PartySerializer, MessageSerializer, Use
 from .models import Game, Party, Message, CustomUser
 
 
-class GameViewSet(viewsets.ModelViewSet):
+class Filterable:
+    """
+    Filterable:
+        Include the fields related to applying filters in all the views that inherit from it.
+    """
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = []
+
+
+class GameViewSet(viewsets.ModelViewSet, Filterable):
     """
     GameViewSet:
         Returns a list of all **games** in the system, ordered by name.
@@ -13,33 +22,30 @@ class GameViewSet(viewsets.ModelViewSet):
     """
     queryset = Game.objects.all().order_by('name')
     serializer_class = GameSerializer
-    filter_backends = [DjangoFilterBackend]
     filterset_fields = ['name']
 
 
-class PartyViewSet(viewsets.ModelViewSet):
+class PartyViewSet(viewsets.ModelViewSet, Filterable):
     """
     PartyViewSet:
         Returns a list of all **parties** in the system, ordered by name.
         Uses the **PartySerializer** as serializer class.
-        Provide the way to filter the games by **game id**.
+        Provide the way to filter the games by **game_id**.
     """
     queryset = Party.objects.all().order_by('name')
     serializer_class = PartySerializer
-    filter_backends = [DjangoFilterBackend]
     filterset_fields = ['game_id']
 
 
-class MessageViewSet(viewsets.ModelViewSet):
+class MessageViewSet(viewsets.ModelViewSet, Filterable):
     """
     MessageViewSet:
-        Returns a list of all **messages** in the system, ordered by created date.
+        Returns a list of all **messages** in the system, ordered by created_date.
         Uses the **MessageSerializer** as serializer class.
-        Provide the way to filter the games by **party id**.
+        Provide the way to filter the games by **party_id**.
     """
     queryset = Message.objects.all().order_by('created_date')
     serializer_class = MessageSerializer
-    filter_backends = [DjangoFilterBackend]
     filterset_fields = ['party_id']
 
 
