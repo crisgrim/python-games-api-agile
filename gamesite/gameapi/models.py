@@ -52,7 +52,7 @@ class Game(BelongsTo, CreatedDate):
         And the **base model** provided by Django because these classes inherit from it.
         Added the field **name** with a maximum length of 200 letters.
     """
-    name = models.CharField(max_length=200)
+    name = models.CharField(max_length=100)
 
     def __str__(self):
         return self.name
@@ -66,7 +66,7 @@ class Party(BelongsTo, CreatedDate):
         Added the field **name** with a maximum length of 200 letters.
         The **game_id** field represents the relationship to the game to which this party belongs.
     """
-    name = models.CharField(max_length=200)
+    name = models.CharField(max_length=100)
     game_id = models.ForeignKey(Game, on_delete=models.CASCADE)
 
     def __str__(self):
@@ -81,7 +81,7 @@ class Message(BelongsTo, CreatedDate):
         Added the field **content** with a maximum length of 200 letters.
         The **party_id** field represents the relationship to the party to which this message belongs.
     """
-    content = models.CharField(max_length=200)
+    content = models.CharField(max_length=100)
     party_id = models.ForeignKey(Party, on_delete=models.CASCADE)
 
     def __str__(self):
