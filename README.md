@@ -34,9 +34,10 @@ Alumna: Cristina Ponce Torres
 ## Línea de comandos
 
 ```
+Inicializar proyecto          python manage.py runserver
+Ejecutar tests                python manage.py test --verbosity 2
 Crear migraciones             python manage.py makemigrations
 Ejecutar migraciones          python manage.py migrate
-Inicializar proyecto          python manage.py runserver
 ```
 
 
@@ -80,4 +81,5 @@ Cambios realizados en el proyecto base:
 - Agregar principios SOLID implementados
 - Realizar refactors
 - Agregar comentarios en el código
+- Agregar tests a modelos y vistas
 ```
