@@ -1,0 +1,6 @@
+Django==3.2.9
+Djangorestframework==3.12.4
+django-rest-auth==0.9.5
+django-allauth==0.46.0
+django-filter==21.1
+psycopg2==2.9.2
