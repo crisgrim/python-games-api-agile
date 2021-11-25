@@ -82,4 +82,17 @@ Cambios realizados en el proyecto base:
 - Realizar refactors
 - Agregar comentarios en el código
 - Agregar tests a modelos y vistas
+- Agregar integración continua con Github actions
+    - Ejecutar migraciones
+    - Ejecutar tarea de tests unitarios
 ```
+
+Para seguir el progreso del proyecto, se pueden revisar las distintas pull request que he ido creando en ramas independientes:
+
+1. [Proyecto base agregado](https://github.com/crisgrim/python-games-api-agile/pull/1)
+2. [Agregar documentación y comentarios al código](https://github.com/crisgrim/python-games-api-agile/pull/2)
+3. [Aplicar principios SOLID y refactors](https://github.com/crisgrim/python-games-api-agile/pull/3)
+4. [Agregar test unitarios](https://github.com/crisgrim/python-games-api-agile/pull/4)
+5. [Agregar integración continua - Parte 1](https://github.com/crisgrim/python-games-api-agile/pull/5)
+6. [Agregar integración continua - Parte 2](https://github.com/crisgrim/python-games-api-agile/pull/6)
+    - [Github Actions ejecutados](https://github.com/crisgrim/python-games-api-agile/actions)
